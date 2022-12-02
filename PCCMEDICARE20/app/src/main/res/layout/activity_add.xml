@@ -22,7 +22,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="28dp"
         android:text="Med. Name"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +159,7 @@
         android:layout_height="37dp"
         android:text="ToggleButton"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="@+id/refdate"
+        app:layout_constraintStart_toStartOf="@+id/remtf"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
 
     <Spinner
@@ -200,33 +200,136 @@
 
     <EditText
         android:id="@+id/sdate"
-        android:layout_width="155dp"
-        android:layout_height="38dp"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Year/Month/Day"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/remtf"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="8dp" />
 
     <Spinner
         android:id="@+id/rema"
-        android:layout_width="118dp"
-        android:layout_height="35dp"
+        android:layout_width="86dp"
+        android:layout_height="32dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="@+id/sdate"
+        app:layout_constraintStart_toStartOf="@+id/remtf"
         app:layout_constraintTop_toTopOf="@+id/textView9" />
 
     <EditText
         android:id="@+id/refdate"
         android:layout_width="151dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Year/Month/Day"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="43dp" />
+
+    <Spinner
+        android:id="@+id/syear"
+        android:layout_width="108dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView8"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintTop_toTopOf="@+id/textView8" />
+
+    <Spinner
+        android:id="@+id/smonth"
+        android:layout_width="88dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/syear"
+        app:layout_constraintStart_toEndOf="@+id/syear"
+        app:layout_constraintTop_toTopOf="@+id/syear" />
+
+    <Spinner
+        android:id="@+id/sday"
+        android:layout_width="84dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="@+id/smonth"
+        app:layout_constraintStart_toEndOf="@+id/smonth"
+        app:layout_constraintTop_toTopOf="@+id/smonth" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        app:layout_constraintBottom_toTopOf="@+id/syear"
+        app:layout_constraintEnd_toEndOf="@+id/syear"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/syear" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Month"
+        app:layout_constraintBottom_toTopOf="@+id/smonth"
+        app:layout_constraintEnd_toEndOf="@+id/smonth"
+        app:layout_constraintStart_toEndOf="@+id/syear" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        app:layout_constraintBottom_toTopOf="@+id/sday"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/smonth" />
+
+    <Spinner
+        android:id="@+id/ryear"
+        android:layout_width="112dp"
+        android:layout_height="34dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
-        app:layout_constraintStart_toStartOf="@+id/rema"
+        app:layout_constraintStart_toStartOf="@+id/syear"
         app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+    <Spinner
+        android:id="@+id/rday"
+        android:layout_width="87dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rmonth"
+        app:layout_constraintStart_toEndOf="@+id/rmonth"
+        app:layout_constraintTop_toTopOf="@+id/rmonth"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/rmonth"
+        android:layout_width="85dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ryear"
+        app:layout_constraintStart_toEndOf="@+id/ryear"
+        app:layout_constraintTop_toTopOf="@+id/ryear" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Year"
+        app:layout_constraintBottom_toTopOf="@+id/ryear"
+        app:layout_constraintEnd_toEndOf="@+id/ryear"
+        app:layout_constraintStart_toStartOf="@+id/ryear" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Month"
+        app:layout_constraintBottom_toTopOf="@+id/rmonth"
+        app:layout_constraintEnd_toStartOf="@+id/rday"
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toEndOf="@+id/ryear" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        app:layout_constraintBottom_toTopOf="@+id/rday"
+        app:layout_constraintEnd_toEndOf="@+id/rday"
+        app:layout_constraintStart_toStartOf="@+id/rday" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@
         android:id="@+id/textViewMedInfo"
         android:layout_width="161dp"
         android:layout_height="161dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="44dp"
         android:layout_marginBottom="136dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"

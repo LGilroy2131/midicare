@@ -1,5 +1,6 @@
 package com.example.pccmedicare20;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -28,6 +30,12 @@ public class add extends AppCompatActivity {
     Spinner freq;
     Spinner nfs;
     Spinner rema;
+    Spinner syear;
+    Spinner smonth;
+    Spinner sday;
+    Spinner ryear;
+    Spinner rmonth;
+    Spinner rday;
     ToggleButton rem;
     ToggleButton rrem;
     @Override
@@ -73,6 +81,50 @@ public class add extends AppCompatActivity {
 // Apply the adapter to the spinner
         nfs.setAdapter(ada);
 
+        syear = (Spinner) findViewById(R.id.syear);
+        ArrayAdapter<CharSequence> years = ArrayAdapter.createFromResource(this,
+                R.array.years, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        syear.setAdapter(years);
+
+        smonth = (Spinner) findViewById(R.id.smonth);
+        ArrayAdapter<CharSequence> months = ArrayAdapter.createFromResource(this,
+                R.array.months, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        smonth.setAdapter(months);
+
+        sday = (Spinner) findViewById(R.id.sday);
+        ArrayAdapter<CharSequence> days = ArrayAdapter.createFromResource(this,
+                R.array.days31, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        sday.setAdapter(days);
+
+
+        ryear = (Spinner) findViewById(R.id.ryear);
+        ArrayAdapter<CharSequence> yearr = ArrayAdapter.createFromResource(this,
+                R.array.years, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        ryear.setAdapter(yearr);
+
+        rmonth = (Spinner) findViewById(R.id.rmonth);
+        ArrayAdapter<CharSequence> monthr = ArrayAdapter.createFromResource(this,
+                R.array.months, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        rmonth.setAdapter(monthr);
+
+        rday = (Spinner) findViewById(R.id.rday);
+        ArrayAdapter<CharSequence> dayr = ArrayAdapter.createFromResource(this,
+                R.array.days31, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        rday.setAdapter(dayr);
+
+
 
         if(op.equals("ed")){//edit option was sellected
             Title.setText("Edit Medication");
@@ -95,9 +147,11 @@ public class add extends AppCompatActivity {
                       rem.setChecked(true);
                   else
                       rem.setChecked(false);
-                  sdate.setText(a[4]);
+                  //sdate.setText(a[4]);
+                  ssdt(a[4]);
                   rema.setSelection( rin(a[5]));
-                  refdate.setText(a[6]);
+                  //refdate.setText(a[6]);
+                  rsdt(a[6]);
                   if(a[7].equals("yes"))
                       rrem.setChecked(true);
                   else
@@ -123,6 +177,7 @@ public class add extends AppCompatActivity {
 
         sub.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                boolean dtok=true;
                 String Medname =name.getText().toString();
                 String Dose = dose.getText().toString();
                 String Fr= (String) freq.getSelectedItem();
@@ -131,9 +186,22 @@ public class add extends AppCompatActivity {
                     Re = "yes";
                  else
                      Re="No";
-                 String SD = sdate.getText().toString();
+                 //String SD = sdate.getText().toString();
+                String SD = sdt();
+                if(SD.equals("nd")){
+                    dtok=false;
+                    Toast.makeText(getApplicationContext(),"Day not in month.",Toast.LENGTH_SHORT).show();
+                }
+
+
                 String Ra= (String) rema.getSelectedItem();
-                 String RD = refdate.getText().toString();
+                 //String RD = refdate.getText().toString();
+                String RD = rdt();
+                if(RD.equals("nd")){
+                    dtok=false;
+                    Toast.makeText(getApplicationContext(),"Day not in month.",Toast.LENGTH_SHORT).show();
+                }
+
                 String Rf;
                  if(rrem.isChecked())
                     Rf = "yes";
@@ -141,10 +209,12 @@ public class add extends AppCompatActivity {
                     Rf="No";
                 String Nf= (String) nfs.getSelectedItem();
                 String Nt= note.getText().toString();
-                meds.add(new String[]{Medname, Dose, Fr,Re,SD,Ra,RD,Rf,Nf,Nt});
-                if(meds.get(0)[0].equals("Add Medication"))
-                    meds.remove(0);
-                home();
+                if(dtok) {
+                    meds.add(new String[]{Medname, Dose, Fr, Re, SD, Ra, RD, Rf, Nf, Nt});
+                    if (meds.get(0)[0].equals("Add Medication"))
+                        meds.remove(0);
+                    home();
+                }
             }
         });
         dbut.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +228,99 @@ public class add extends AppCompatActivity {
 
 
     }
+        private String sdt(){
+        String dt="";
+        String month = (String) smonth.getSelectedItem();
+        String day = (String)sday.getSelectedItem();
+        if(month.equals("04")||month.equals("06")||month.equals("09")||month.equals("11")){
+            if (day.equals("31"))
+                return("nd");
+        }
+        if(month.equals("02")){
+            if(day.equals("31")||day.equals("30")||day.equals("39"))
+                return("nd");
+        }
+        dt=syear.getSelectedItem()+"-"+smonth.getSelectedItem()+"-"+sday.getSelectedItem();
+
+        return dt;
+        }
+        private void ssdt(String a){
+        String full = a;
+        String year;
+        String month;
+        String day;
+        year=a.substring(0,4);
+        month= a.substring(5,a.length()-3);
+        day=a.substring(a.length()-2,a.length());
+
+            String[] b = getResources().getStringArray(R.array.years);
+            for(int i = 0; i<(b).length;i++){
+                if(year.equals(b[i]))
+                    syear.setSelection(i);
+            }
+
+            String[] c = getResources().getStringArray(R.array.months);
+            for(int i = 0; i<(c).length;i++){
+                if(month.equals(c[i]))
+                    smonth.setSelection(i);
+            }
+
+            String[] d = getResources().getStringArray(R.array.days31);
+            for(int i = 0; i<(d).length;i++){
+                if(day.equals(d[i]))
+                    sday.setSelection(i);
+            }
+
+
+
+        }
+    private String rdt(){
+        String dt="";
+        String month =(String)rmonth.getSelectedItem();
+        String day = (String)rday.getSelectedItem();
+        if(month.equals("04")||month.equals("06")||month.equals("09")||month.equals("11")){
+            if (day.equals("31"))
+                return("nd");
+        }
+        if(month.equals("02")){
+            if(day.equals("31")||day.equals("30")||day.equals("39"))
+                return("nd");
+        }
+        dt=ryear.getSelectedItem()+"-"+rmonth.getSelectedItem()+"-"+rday.getSelectedItem();
+
+        return dt;
+    }
+    private void rsdt(String a){
+        String full = a;
+        String year;
+        String month;
+        String day;
+        year=a.substring(0,4);
+        month= a.substring(5,a.length()-3);
+        day=a.substring(a.length()-2,a.length());
+
+        String[] b = getResources().getStringArray(R.array.years);
+        for(int i = 0; i<(b).length;i++){
+            if(year.equals(b[i]))
+                ryear.setSelection(i);
+        }
+
+        String[] c = getResources().getStringArray(R.array.months);
+        for(int i = 0; i<(c).length;i++){
+            if(month.equals(c[i]))
+                rmonth.setSelection(i);
+        }
+
+        String[] d = getResources().getStringArray(R.array.days31);
+        for(int i = 0; i<(d).length;i++){
+            if(day.equals(d[i]))
+                rday.setSelection(i);
+        }
+
+
+
+    }
+
 
     private int frin(String s) {
         String[] a = getResources().getStringArray(R.array.freq);

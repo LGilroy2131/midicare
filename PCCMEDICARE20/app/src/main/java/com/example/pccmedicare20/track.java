@@ -10,15 +10,14 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class track extends AppCompatActivity {
     String dt = "2022/11/14";
     Button goback;
     ArrayList<String[]> meds = new ArrayList<String[]>();
-    LocalDate d1;
-    LocalDate d2;
+    LocalDate caldt;
+    LocalDate smeddt;
     private static final String TAG = "calendar";
 
     private TextView thedate, medInfo;
@@ -58,16 +57,30 @@ public class track extends AppCompatActivity {
 //            if (medDay==dayOfMonth) { // condition to display medication for selected day.
 //                medInfo.setText();
 
-            d1= LocalDate.parse(date);
-            //        //take
+            caldt = LocalDate.parse(date);
+
             String take="";
+
             for(String[] a: meds) {
-            if(d1.isAfter(LocalDate.parse(a[4]))) {
+                smeddt =LocalDate.parse(a[4]);
+                if(a[2].equals("daily")){
+                if (caldt.isAfter(smeddt)) {
 
-                take=take+"take"+a[0]+"\n";
-                     //print out
+                    take = take + "take " + a[0] + "\n";
+                    //print out
 
+                }
             }
+                if(a[2].equals("weekly")){
+                    LocalDate temdt=smeddt;
+                    for(int i=0;i<10; i++){
+                        temdt=temdt.plusDays(7);
+                        if(temdt.compareTo(caldt)==0)
+                        take = take + "take " + a[0] + "\n";
+                    }
+
+
+                }
 //            if(a[2].equals("weekly")){
 //                if (a[4].equals(dt)) {
 //                    //print out
@@ -84,7 +97,7 @@ public class track extends AppCompatActivity {
 
         for(String[] a: meds) {
 
-                if (LocalDate.parse(a[6]).equals(d1)) {
+                if (LocalDate.parse(a[6]).equals(caldt)) {
                     refil=refil+"Refil "+a[0]+"\n";
 
                     //print out
