@@ -2,8 +2,6 @@
     <string name="app_name">PCCMEDICARE2.0</string>
     <string-array name="freq">
         <item>weekly</item>
-        <item>hourly</item>
-        <item>am\pm</item>
         <item>daily</item>
     </string-array>
     <string-array name="ra">

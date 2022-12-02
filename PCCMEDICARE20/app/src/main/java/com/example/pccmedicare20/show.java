@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class show extends AppCompatActivity {
@@ -22,6 +23,7 @@ public class show extends AppCompatActivity {
     Button ebut;
     Button tbut;
     TextView a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +122,7 @@ public class show extends AppCompatActivity {
 
     private void track(){
 
-        Intent inten = new Intent(this,calendar.class);
+        Intent inten = new Intent(this,track.class);
         Bundle bundle = new Bundle();
 
         inten.putExtra("xxx", meds);
